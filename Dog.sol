@@ -19,15 +19,15 @@ contract Dogs is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable, VRFConsume
     bool public mintWindow = false;
     
     // METADATA
-    string constant METADATA_BG1 = "ipfs://QmZ8K5L7BqnvdZ4RbKDNuUqD5s7eDQG8VwtfzJRhMrbtqD";
-    string constant METADATA_BG2 = "ipfs://QmNjUEfZYVZa3wPvPaBu2KCp5URVEJVmaRR8xHStrRxV7U";
-    string constant METADATA_BG3 = "ipfs://QmXsmaF98Vw2H1fgRCxaEEi4zJRsLzCnpXH1moqZvuNLYy";
-    string constant METADATA_BG4 = "ipfs://QmcpFmHvUZML1wqDEWvMZQbk9MiJ4pMqKiWcP9ApGJDgDP";
+    string constant METADATA_ROAD = "ipfs://QmQ6JJwFY7rPHd9mpx5fYJsFXrdyHQpTqyhWXS1RXYicSw";
+    string constant METADATA_GRASS = "ipfs://QmXBidqVkcR7y52BPis1BtdxexMsjR4Ny6sNoGemqt7ri9";
+    string constant METADATA_RIVER = "ipfs://QmR8VopETcGUyog8nJGq9pTthaGiA1Vf6of5rBUg1yFLAJ";
+    string constant METADATA_MOON = "ipfs://QmU6areanZA4f4R2hYRpfuny67ZjeLhsc9yiYDJKE9Wp13";
 
 
-    // config of chainlink VRF
+  // config of chainlink VRF
     VRFCoordinatorV2Interface COORDINATOR;
-    uint64 s_subscriptionId; 
+    uint64 s_subscriptionId;
     bytes32 keyHash =
         0x79d3d8832d904592c0bf9818b621522c988bb8b0c05cdc3b15aea1b6e8db0c15;
     uint32 callbackGasLimit = 100000;
@@ -35,7 +35,7 @@ contract Dogs is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable, VRFConsume
     uint32 numWords = 1; //申请的随机数个数
     mapping(uint256 => uint256) reqIdToTokenId;
 
-    constructor(uint64 subId) ERC721("Dogs", "DG") VRFConsumerBaseV2(0x2Ca8E0C643bDe4C2E08ab1fA0da3401AdAD7734D) {
+    constructor(uint64 subId) ERC721("Liugezhou", "LGZ") VRFConsumerBaseV2(0x2Ca8E0C643bDe4C2E08ab1fA0da3401AdAD7734D) {
         s_subscriptionId = subId;
         COORDINATOR = VRFCoordinatorV2Interface(0x2Ca8E0C643bDe4C2E08ab1fA0da3401AdAD7734D);
     }
@@ -51,12 +51,12 @@ contract Dogs is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable, VRFConsume
         _tokenIdCounter.increment();
         _safeMint(msg.sender, tokenId);
         request(tokenId);
-    }
+    } 
 
    // 每个去mint这个nft的人，得到一个对应的nft，以及它的token id，to指的是mint完发给谁，url是指nft北周的metadata的网址是什么
    // payable 是指调用的时候发送一部分的资金
    // function safeMint(address to, string memory uri) public onlyOwner {
-    function Mint() public payable {
+     function mint() public payable {
         require(mintWindow, "Mint is not open yet!");
         require(msg.value == 0.002 ether, "The price of dog ngt is 0.002 ether"); //获取交易资金
         require(totalSupply() < MAX_AMOUNT, "Dog NFT is sold out!");
@@ -66,7 +66,6 @@ contract Dogs is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable, VRFConsume
         request(tokenId);
     }
 
-    // 提现、权限onluOwner，external表示不会有其它去调用
     function withdraw(address addr) external onlyOwner {
         payable(addr).transfer(address(this).balance);
     }
@@ -88,34 +87,34 @@ contract Dogs is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable, VRFConsume
         return requestId;
     }
 
-    // 接收一个结果
+    // 发完请求后的回调
     function fulfillRandomWords(
         uint256 _requestId,
         uint256[] memory _randomWords
     ) internal override {
         uint256 randomNumber = _randomWords[0] % 4;
         if (randomNumber == 0) {
-            _setTokenURI(reqIdToTokenId[_requestId], METADATA_BG1);
+            _setTokenURI(reqIdToTokenId[_requestId], METADATA_ROAD);
         } else if (randomNumber == 1) {
-            _setTokenURI(reqIdToTokenId[_requestId], METADATA_BG2);
+            _setTokenURI(reqIdToTokenId[_requestId], METADATA_GRASS);
         } else if (randomNumber == 2) {
-            _setTokenURI(reqIdToTokenId[_requestId], METADATA_BG3);
+            _setTokenURI(reqIdToTokenId[_requestId], METADATA_RIVER);
         } else {
-            _setTokenURI(reqIdToTokenId[_requestId], METADATA_BG4);
+            _setTokenURI(reqIdToTokenId[_requestId], METADATA_MOON);
         }
     }
 
-    // 把一些地址加入到白名单当中
     function addToWhiteList(address[] calldata addrs) public onlyOwner {
-        for(uint256 i = 0; i < addrs.length;i ++){
+        for (uint256 i = 0; i < addrs.length; i++) {
             whiteList[addrs[i]] = true;
         }
     }
 
-    function setWindow(bool _preMintOpen,bool _mintOpen) public {
-          preMintWindow = _preMintOpen;
-          mintWindow = _mintOpen;
-      }
+    function setWindow(bool _preMintOpen, bool mintOpen) public onlyOwner {
+        preMintWindow = _preMintOpen;
+        mintWindow = mintOpen;
+    }
+
     // The following functions are overrides required by Solidity.
 
     function _beforeTokenTransfer(address from, address to, uint256 tokenId, uint256 batchSize)

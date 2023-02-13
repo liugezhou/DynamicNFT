@@ -1,0 +1,16 @@
+{
+  "description": "Desktop about Grass",
+  "external_url": "https://openseacreatures.io/3",
+  "image": "https://ipfs.filebase.io/ipfs/QmNjUEfZYVZa3wPvPaBu2KCp5URVEJVmaRR8xHStrRxV7U",
+  "name": "Grass",
+  "attributes": [
+    {
+      "trait_type": "Breed",
+      "value": "Grass"
+    },
+    {
+      "trait_type": "temperature",
+      "value": "average"
+    }
+  ]
+}

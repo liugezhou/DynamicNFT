@@ -1,0 +1,16 @@
+{
+  "description": "Desktop about River",
+  "external_url": "https://openseacreatures.io/3",
+  "image": "https://ipfs.filebase.io/ipfs/QmXsmaF98Vw2H1fgRCxaEEi4zJRsLzCnpXH1moqZvuNLYy",
+  "name": "River",
+  "attributes": [
+    {
+      "trait_type": "Breed",
+      "value": "River"
+    },
+    {
+      "trait_type": "temperature",
+      "value": "average"
+    }
+  ]
+}

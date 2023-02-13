@@ -1,0 +1,16 @@
+{
+  "description": "Desktop about Moon.",
+  "external_url": "https://openseacreatures.io/3",
+  "image": "https://ipfs.filebase.io/ipfs/QmcpFmHvUZML1wqDEWvMZQbk9MiJ4pMqKiWcP9ApGJDgDP",
+  "name": "Moon",
+  "attributes": [
+    {
+      "trait_type": "Breed",
+      "value": "Moon"
+    },
+    {
+      "trait_type": "temperature",
+      "value": "average"
+    }
+  ]
+}

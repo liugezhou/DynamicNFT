@@ -1,0 +1,16 @@
+{
+  "description": "Desktop about Road.",
+  "external_url": "https://openseacreatures.io/3",
+  "image": "https://ipfs.filebase.io/ipfs/QmZ8K5L7BqnvdZ4RbKDNuUqD5s7eDQG8VwtfzJRhMrbtqD",
+  "name": "Road",
+  "attributes": [
+    {
+      "trait_type": "Breed",
+      "value": "Road"
+    },
+    {
+      "trait_type": "temperature",
+      "value": "average"
+    }
+  ]
+}

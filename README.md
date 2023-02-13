@@ -53,5 +53,9 @@ deploy Injected Provider-MetaMask的时候 显示资金不足，不能确认。
 3. 打开[chain link doc](https://docs.chain.link/),找到 VRF v2：可验证随机函数，找到get Random Number复制代码。
 4. 代码修改完毕后编译、部署。 
 5. 部署：
-  - 通过 [这个网址](https://vrf.chain.link),绑定钱包、create subscription、充值20个link
-  - link没有的话，通过
+  - 通过 [vrf.chain](https://vrf.chain.link),绑定钱包、create subscription、充值20个link
+  - link没有的话，通过提示充值即可。
+6. 回到 remix 编辑器下，将在 [vrf.chain](https://vrf.chain.link) 刚生成的 ID 值填入到 Deploy 旁边，然后点击 Deploy
+7. deploy成功后，复制 Deployed Contracts值 在[vrf.chain](https://vrf.chain.link) 中 Add consumer中填入。  
+8. 然后设置window、白名单，填入 value 值，preMint、mint即可。
+9. preMint或者 mint成功后，在 [testnets](https://testnets.opensea.io/zh-CN)绑定钱包，查看即可。
